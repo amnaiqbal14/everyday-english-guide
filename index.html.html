@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Free everyday English phrases, audio, role-play dialogues and quizzes.">
+<title>Everyday English Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<style>
+/* Layout concept: a sticky header with five tabs over one calm column. Phrases are ruled lists, dialogues are chat bubbles, practice is one question at a time. The only loud element is the marigold highlighter that marks whatever is being spoken. */
+:root{
+  --bg:#F1F4F8; --surface:#FFFFFF; --ink:#101B2D; --ink-2:#4A5A70; --line:#D9E0EA;
+  --accent:#2547E0; --accent-fg:#FFFFFF; --accent-soft:#E4E9FD;
+  --hl:#FFD65C; --hl-ink:#101B2D;
+  --good:#17794A; --good-soft:#DDF3E8; --bad:#B8321F; --bad-soft:#FBE4E0;
+  --shadow:0 10px 30px rgba(16,27,45,.14);
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Figtree','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1422; --surface:#151E31; --ink:#EAF0FA; --ink-2:#9FB0C9; --line:#263249;
+    --accent:#8AA0FF; --accent-fg:#0D1422; --accent-soft:#1D2A55;
+    --hl:#F2C14E; --hl-ink:#0D1422;
+    --good:#4CC38A; --good-soft:#12352A; --bad:#FF8A78; --bad-soft:#3A1B1A;
+    --shadow:0 10px 30px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1422; --surface:#151E31; --ink:#EAF0FA; --ink-2:#9FB0C9; --line:#263249;
+  --accent:#8AA0FF; --accent-fg:#0D1422; --accent-soft:#1D2A55;
+  --hl:#F2C14E; --hl-ink:#0D1422;
+  --good:#4CC38A; --good-soft:#12352A; --bad:#FF8A78; --bad-soft:#3A1B1A;
+  --shadow:0 10px 30px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--font-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.no-audio [data-act="speak"],.no-audio .needs-audio{display:none}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top-in{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand audio" "tabs tabs";align-items:center;gap:4px 12px;padding-block:10px 0}
+.brand{grid-area:brand;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font:700 1.1rem/1.1 var(--font-display);letter-spacing:-.01em;min-width:0}
+.brand svg{flex:none;width:30px;height:30px}
+.tabs{grid-area:tabs;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;padding:10px 12px;color:var(--ink-2);text-decoration:none;font-weight:600;border-bottom:3px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.audio-wrap{grid-area:audio;position:relative}
+.audio-panel{position:absolute;right:0;top:calc(100% + 8px);width:min(320px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:grid;gap:14px}
+.audio-panel h2{margin:0;font-size:1rem}
+.audio-panel .field{display:grid;gap:6px}
+.audio-panel .field span{font-size:.8rem;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media (min-width:860px){
+  .top-in{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"brand tabs audio";gap:0 24px;padding-block:0}
+  .tabs a{padding:20px 14px 17px}
+}
+
+/* Type and common controls */
+main{padding-block:28px 80px}
+h1{font:700 clamp(1.9rem,4.6vw,2.9rem)/1.08 var(--font-display);letter-spacing:-.025em;margin:0 0 10px;text-wrap:balance}
+h2{font:650 1.35rem/1.2 var(--font-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+h3{font:650 1.05rem/1.25 var(--font-display);margin:0}
+.lede{color:var(--ink-2);max-width:62ch;margin:0 0 24px}
+.eyebrow{margin:0;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);font-weight:600;cursor:pointer;line-height:1.2}
+.btn:hover{filter:brightness(1.06)}
+.btn.sec{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.sec:hover{border-color:var(--accent);filter:none}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn svg{width:20px;height:20px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+.link{background:none;border:0;padding:4px 0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.back{margin-bottom:12px;text-decoration:none}
+.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;font-size:.92rem;white-space:nowrap}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg button{padding:9px 16px;background:transparent;border:0;cursor:pointer;font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.icon{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:10px;border:0;background:transparent;color:var(--ink-2);cursor:pointer;flex:none}
+.icon svg{width:22px;height:22px}
+.icon:hover{background:var(--accent-soft);color:var(--accent)}
+.icon.save[aria-pressed="true"]{color:var(--accent)}
+.icon.save[aria-pressed="true"] svg{fill:currentColor}
+.icon.learn[aria-pressed="true"]{color:var(--good)}
+.icon.learn[aria-pressed="true"] circle{fill:currentColor}
+.icon.learn[aria-pressed="true"] path{stroke:var(--surface)}
+.lvl{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:var(--ink-2);letter-spacing:.04em}
+.lvl b{display:inline-block;width:5px;border-radius:1px;background:var(--line)}
+.lvl b:nth-of-type(1){height:6px}.lvl b:nth-of-type(2){height:10px}.lvl b:nth-of-type(3){height:14px}
+.lvl{--n:1}.lvl[data-l="A2"]{--n:2}.lvl[data-l="B1"]{--n:3}
+.lvl b:nth-of-type(1){background:var(--accent)}
+.lvl[data-l="A2"] b:nth-of-type(-n+2),.lvl[data-l="B1"] b{background:var(--accent)}
+.lvl b{margin-left:-3px}.lvl b:first-of-type{margin-left:0}
+mark{background:var(--hl);color:var(--hl-ink);padding:0 2px;border-radius:3px}
+.say-target{border-radius:4px;transition:background-color .15s}
+.say-target.speaking{background:var(--hl);color:var(--hl-ink);box-shadow:0 0 0 3px var(--hl)}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;width:var(--w,0%);background:var(--accent);border-radius:99px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;z-index:40;max-width:calc(100vw - 32px);font-weight:600}
+
+/* Today */
+.today-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.potd{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:grid;gap:14px;align-content:start}
+.potd-text{margin:0;font:650 clamp(1.5rem,3.6vw,2.2rem)/1.25 var(--font-display);letter-spacing:-.015em;text-wrap:balance}
+.hl{background-image:linear-gradient(var(--hl),var(--hl));background-size:100% .26em;background-position:0 94%;background-repeat:no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl.speaking{background-size:100% 100%;color:var(--hl-ink);box-shadow:none}
+.potd-note{margin:0;color:var(--ink-2)}
+.potd-reply{margin:0;padding:12px 14px;background:var(--bg);border-radius:10px;display:grid;gap:2px}
+.snap{display:grid;gap:0;align-content:start;border-top:1px solid var(--line)}
+.snap>div{padding:16px 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.snap b{font:700 2rem/1 var(--font-display);font-variant-numeric:tabular-nums}
+.snap span{color:var(--ink-2)}
+.section-gap{margin-top:40px}
+.actions3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+.action{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);text-decoration:none}
+.action:hover{border-color:var(--accent)}
+.action strong{font:650 1.1rem/1.2 var(--font-display)}
+.action span{color:var(--ink-2);font-size:.94rem}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:14px}
+.tile{text-align:left;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;display:grid;gap:8px}
+.tile:hover{border-color:var(--accent)}
+.tile strong{font-weight:650}
+.tile small{color:var(--ink-2);font-variant-numeric:tabular-nums}
+@media (max-width:759px){.today-grid{grid-template-columns:minmax(0,1fr)}.potd{padding:20px}}
+
+/* Phrasebook */
+.toolbar{display:grid;gap:12px;margin-bottom:6px}
+.search{width:100%;max-width:520px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.search::placeholder{color:var(--ink-2)}
+.filters{display:flex;flex-wrap:wrap;gap:10px 18px}
+.fgroup{display:flex;flex-wrap:wrap;gap:8px}
+.scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.count-line{color:var(--ink-2);margin:8px 0 0;font-size:.94rem}
+.topic{margin-top:36px}
+.topic-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;margin-bottom:10px}
+.topic-head .blurb{margin:0;color:var(--ink-2);flex:1 1 260px}
+.topic-head .tcount{color:var(--ink-2);font-size:.9rem;font-variant-numeric:tabular-nums}
+.rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:14px 0;border-bottom:1px solid var(--line);align-items:start}
+.phrase{margin:0;font-size:1.18rem;line-height:1.35;font-weight:600;overflow-wrap:anywhere}
+.row.is-learned .phrase{color:var(--ink-2)}
+.note{margin:4px 0 0;color:var(--ink-2);font-size:.93rem}
+.row-meta{display:flex;align-items:center;gap:16px;margin-top:8px}
+.reply{margin-top:8px;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 14px;background:var(--accent-soft);border-radius:10px;max-width:520px}
+.reply span{flex:1;min-width:0}
+.row-actions{display:flex;gap:2px}
+.empty{padding:40px 0;color:var(--ink-2)}
+
+/* Dialogues */
+.dlg-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.dlg-item{width:100%;text-align:left;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);cursor:pointer}
+.dlg-item:hover{border-color:var(--accent)}
+.dlg-item h2{font-size:1.15rem}
+.dlg-item p{margin:0;color:var(--ink-2);font-size:.94rem}
+.dlg-item .side{grid-row:1 / span 2;grid-column:2;display:grid;justify-items:end;align-content:center;gap:6px;font-size:.86rem;color:var(--ink-2)}
+.dlg-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0}
+.chat{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.bubble{max-width:min(560px,94%);padding:10px 8px 10px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 6px;align-items:center;align-self:flex-start}
+.bubble .who{grid-column:1 / -1;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.bubble p{margin:0;overflow-wrap:anywhere}
+.bubble.you{align-self:flex-end;background:var(--accent-soft);border-color:transparent}
+.bubble.speaking{background:var(--hl);color:var(--hl-ink);border-color:transparent}
+.bubble.speaking .who{color:var(--hl-ink)}
+.bubble.speaking .icon{color:var(--hl-ink)}
+.turn{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:12px 14px;border:1px solid var(--line);background:var(--bg);border-radius:10px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent)}
+.opt.ok{background:var(--good-soft);border-color:var(--good)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt[disabled]{cursor:default}
+.why{margin:6px 0 0;font-size:.92rem;color:var(--ink-2)}
+.summary{margin-top:20px;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:20px;display:grid;gap:12px}
+.summary b{font:700 2.2rem/1 var(--font-display)}
+
+/* Practice */
+.setup{display:grid;gap:18px;max-width:720px}
+.setup .group{display:grid;gap:8px}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:16px;max-width:720px}
+.qhead{display:grid;gap:8px;max-width:720px;margin-bottom:14px;color:var(--ink-2);font-size:.92rem;font-variant-numeric:tabular-nums}
+.qtype{margin:0}
+.qtext{margin:0;font:650 1.4rem/1.35 var(--font-display);overflow-wrap:anywhere}
+.blank{display:inline-block;min-width:4.5em;border-bottom:3px solid var(--accent);text-align:center;color:var(--accent)}
+.situation{margin:0;padding:12px 14px;background:var(--bg);border-radius:10px}
+.slot{min-height:58px;border:1px dashed var(--ink-2);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+.bank{display:flex;flex-wrap:wrap;gap:8px}
+.tok{padding:9px 13px;border:1px solid var(--line);background:var(--bg);border-radius:9px;cursor:pointer;font-weight:600}
+.slot .tok{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.tok:hover{border-color:var(--accent)}
+.fb{padding:14px 16px;border-radius:12px;display:grid;gap:4px}
+.fb p{margin:0}
+.fb.good{background:var(--good-soft);color:var(--ink)}
+.fb.good strong{color:var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink)}
+.fb.bad strong{color:var(--bad)}
+.score{font:700 3.4rem/1 var(--font-display);font-variant-numeric:tabular-nums}
+.missed{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.missed li{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}
+.missed p{margin:0;min-width:0;overflow-wrap:anywhere}
+.missed small{display:block;color:var(--ink-2)}
+
+/* Progress */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:34px}
+.stat{padding:18px 16px 18px 0;display:grid;gap:4px}
+.stat b{font:700 2.4rem/1 var(--font-display);font-variant-numeric:tabular-nums}
+.stat span{color:var(--ink-2);font-size:.92rem}
+.week{display:flex;gap:8px;margin-top:12px}
+.day{display:grid;justify-items:center;gap:6px;font-size:.78rem;color:var(--ink-2);font-weight:600}
+.day i{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);display:block}
+.day.on i{background:var(--accent);border-color:var(--accent)}
+.day.today i{border-color:var(--ink)}
+.prog-list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px;max-width:720px}
+.prog-list li{display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr) auto;gap:12px;align-items:center}
+.prog-list small{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.spark{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:12px;padding-bottom:0;border-bottom:1px solid var(--line)}
+.spark div{flex:1;max-width:44px;display:grid;align-content:end;justify-items:center;gap:4px;height:100%;font-size:.78rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.spark i{display:block;width:100%;background:var(--accent);border-radius:6px 6px 0 0;min-height:3px}
+.hist{list-style:none;margin:12px 0 0;padding:0;border-top:1px solid var(--line);max-width:720px}
+.hist li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.hist small{color:var(--ink-2)}
+.reset-box{margin-top:12px;padding:14px;border:1px solid var(--bad);border-radius:12px;background:var(--bad-soft);display:grid;gap:10px;max-width:520px}
+.reset-box p{margin:0}
+.fine{color:var(--ink-2);font-size:.9rem}
+@media (max-width:560px){.prog-list li{grid-template-columns:minmax(0,1fr) auto}.prog-list li .bar{grid-column:1 / -1;order:3}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<style>[hidden]{display:none!important}body{margin:0}</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#today" aria-label="Everyday English Guide, Today">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="8" fill="var(--accent)"/><path d="M10 23v6l7-6z" fill="var(--accent)"/><rect x="8" y="11" width="16" height="3" rx="1.5" fill="var(--hl)"/><rect x="8" y="16" width="10" height="3" rx="1.5" fill="var(--accent-fg)" opacity=".85"/></svg>
+      <span>Everyday English Guide</span>
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#today" data-view="today">Today</a>
+      <a href="#phrasebook" data-view="phrasebook">Phrasebook</a>
+      <a href="#dialogues" data-view="dialogues">Dialogues</a>
+      <a href="#practice" data-view="practice">Practice</a>
+      <a href="#progress" data-view="progress">Progress</a>
+    </nav>
+    <div class="audio-wrap needs-audio">
+      <button class="btn sec" id="audioBtn" data-act="audio-toggle" aria-expanded="false" aria-controls="audioPanel">Audio</button>
+      <div class="audio-panel" id="audioPanel" hidden>
+        <h2>Audio settings</h2>
+        <div class="field"><span>Accent</span>
+          <div class="seg" role="group" aria-label="Accent">
+            <button data-act="audio-accent" data-v="US" aria-pressed="true">American</button>
+            <button data-act="audio-accent" data-v="GB" aria-pressed="false">British</button>
+          </div></div>
+        <div class="field"><span>Speed</span>
+          <div class="seg" role="group" aria-label="Speed">
+            <button data-act="audio-speed" data-v="0" aria-pressed="true">Normal</button>
+            <button data-act="audio-speed" data-v="1" aria-pressed="false">Slow</button>
+          </div></div>
+        <button class="btn" data-act="audio-test">Play a sample</button>
+        <p class="fine" style="margin:0">Voices come from your device, so they sound different on different phones and computers.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap"><main id="app"></main></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= Content ================= */
+var TOPICS=[
+{id:'greet',name:'Greetings and small talk',blurb:'Start and end a chat in a friendly way.',p:[
+["Hi, how's it going?","A1","Casual. Used with friends and colleagues.","Pretty good, thanks. How about you?"],
+["Good morning! Did you sleep well?","A1","","Yes, I did. Thanks for asking."],
+["Nice to see you again.","A1","","You too! It's been a while."],
+["How's your day been so far?","A2","","Busy, but good. And yours?"],
+["Long time no see!","A2","Informal. Said when you meet someone after a long gap.","I know! It's been ages."],
+["What have you been up to lately?","A2","Asks about recent activities.","Not much. Just work and family. You?"],
+["Say hi to your family for me.","A2","A friendly way to end a chat.","I will, thanks."],
+["It was great catching up. Let's stay in touch.","B1","A warm goodbye.","Definitely. Take care!"]]},
+{id:'intro',name:'Introducing yourself',blurb:'Say who you are, what you do and what you like.',p:[
+["Hello, my name is Sara. Nice to meet you.","A1","","Nice to meet you too."],
+["I work as a teacher.","A1","Use 'work as' before a job title.",""],
+["I'm from Multan, but I live in Lahore now.","A2","","Oh, how do you like it there?"],
+["I'm studying computer science at university.","A2","","That sounds interesting."],
+["In my free time, I like reading and cooking.","A2","","Me too! What do you like to cook?"],
+["Let me introduce you to my friend, Ali.","A2","Use it to introduce a third person.","Pleased to meet you, Ali."],
+["I've been learning English for about two years.","B1","Present perfect continuous: it started in the past and still continues.","That's great. Your English is very good."],
+["I'm a bit shy, so it takes me a while to open up.","B1","'Open up' means to start sharing your thoughts and feelings.","That's okay. Take your time."]]},
+{id:'home',name:'Home and family',blurb:'Everyday sentences for the people you live with.',p:[
+["Dinner's ready!","A1","","Coming!"],
+["Could you pass me the remote?","A1","A polite request.","Sure, here you go."],
+["Can you turn the volume down a little?","A2","","Sorry! Is that better?"],
+["I'll do the dishes if you cook.","A2","Offering a fair deal.","Deal!"],
+["It's my turn to take out the rubbish.","A2","British English. American English says 'trash' or 'garbage'.",""],
+["Who left the lights on?","A2","","Sorry, that was me."],
+["I'm going to bed. Don't stay up too late.","A2","","I won't. Good night!"],
+["We're out of milk. Can you pick some up on your way home?","B1","'Pick up' means to buy or collect something.","Sure. Anything else?"]]},
+{id:'food',name:'Food and restaurants',blurb:'Order, ask questions and pay the bill.',p:[
+["Could I see the menu, please?","A1","","Of course. I'll be right back."],
+["I'd like the grilled chicken, please.","A1","'I'd like' sounds more polite than 'I want'.","Great choice. Anything to drink?"],
+["What do you recommend?","A2","","The pasta is very popular."],
+["Does this dish have nuts in it?","A2","Useful if you have an allergy.","No, there are no nuts in it."],
+["Could we get some more water, please?","A2","","Certainly."],
+["Could I get this to go?","A2","American English. British English says 'takeaway'.","Sure. I'll put it in a box."],
+["Could we have the bill, please?","A2","American English says 'check'.","Of course. I'll bring it right over."],
+["That was delicious. Compliments to the chef!","B1","","I'll tell him. Thank you!"]]},
+{id:'shop',name:'Shopping',blurb:'Ask about prices, sizes and returns.',p:[
+["How much is this?","A1","","It's 500 rupees."],
+["Can I try this on?","A1","","Of course. The fitting rooms are over there."],
+["Do you have this in a larger size?","A2","","Let me check in the back."],
+["I'm just looking, thanks.","A2","A polite way to say you don't need help yet.","No problem. Let me know if you need anything."],
+["Is there any discount on this?","A2","","Yes, it's ten percent off today."],
+["Do you take cards, or is it cash only?","A2","","We take both."],
+["I'd like to return this. It doesn't fit.","B1","","Do you have the receipt?"],
+["Could you gift-wrap it, please?","B1","","Sure. It'll just take a minute."]]},
+{id:'travel',name:'Getting around',blurb:'Directions, tickets and hotel check-in.',p:[
+["Excuse me, how do I get to the station?","A1","","Go straight and turn left at the lights."],
+["Is it far from here?","A1","","No, it's about five minutes on foot."],
+["One ticket to the city centre, please.","A1","American English spells it 'center'.","That's 200 rupees."],
+["Does this bus go to the airport?","A2","","Yes, it does. It leaves in ten minutes."],
+["How long does the journey take?","A2","","About two hours."],
+["Could you tell me where platform three is?","A2","In an indirect question the word order is 'where platform three is', not 'where is platform three'.","It's at the end, on the right."],
+["I think I'm lost. Could you show me on the map?","B1","","Sure. We're here, and you want to go there."],
+["I'd like to check in, please. I have a reservation.","B1","At a hotel.","Certainly. May I see your ID?"]]},
+{id:'work',name:'Work and study',blurb:'Meetings, deadlines and talking to teachers.',p:[
+["Could we schedule a meeting for tomorrow?","A2","","Sure. Is ten o'clock okay?"],
+["I'll send you the report by the end of the day.","A2","'By' means no later than.","Thanks. That works for me."],
+["I'm running a bit behind schedule.","B1","","No problem. Let me know if you need help."],
+["Could you give me a few more details?","B1","","Of course. Let me explain."],
+["Could you walk me through the process?","B1","'Walk someone through' means explain step by step.","Sure. First, you log in to the system."],
+["Can I get your feedback on my draft?","B1","","Yes, I'll read it this afternoon."],
+["Can I hand in my assignment a day late?","B1","'Hand in' means to give work to a teacher.","Yes, but please send me an email first."],
+["I'd like to make an appointment with my supervisor.","B1","","She's free on Wednesday afternoon."]]},
+{id:'health',name:'Health',blurb:'Describe how you feel and ask about treatment.',p:[
+["I don't feel well.","A1","","What's wrong?"],
+["I have a headache.","A1","Use 'have' for common problems: a headache, a cold, a fever.","I'm sorry to hear that. Would you like some water?"],
+["Get well soon!","A1","Said to someone who is ill.","Thank you. That's kind of you."],
+["I'd like to make an appointment to see the doctor.","A2","","Is tomorrow morning okay?"],
+["How often should I take this medicine?","A2","","Twice a day, after meals."],
+["Is it serious?","A2","","No, it should clear up in a few days."],
+["I'm allergic to penicillin.","A2","Say this at the doctor's or the pharmacy.","Thank you. I'll note that down."],
+["I've had a fever since yesterday.","B1","Use 'since' with a point in time.","Have you taken anything for it?"]]},
+{id:'phone',name:'Phone and messages',blurb:'Calls, texts and bad signals.',p:[
+["Hello, may I speak to Mr Khan, please?","A2","","Speaking."],
+["Can I take a message?","A2","","Yes, please ask her to call me back."],
+["I'll call you back in ten minutes.","A2","","Okay. Talk to you soon."],
+["Sorry, I think I have the wrong number.","A2","","No problem. Goodbye."],
+["Could you send me the details by text?","A2","","Sure. I'll send them now."],
+["Just texting to let you know I'm on my way.","A2","","Great. See you soon."],
+["Sorry, you're breaking up. Can you hear me?","B1","Said when the signal is poor.","Not very well. I'll call you back."],
+["Hold on a second. I'm getting another call.","B1","","No problem. I'll wait."]]},
+{id:'feel',name:'Feelings and opinions',blurb:'Share how you feel and agree or disagree politely.',p:[
+["That sounds like a great idea.","A2","","I'm glad you think so."],
+["I'm really excited about the trip.","A2","","Me too! Where are you going first?"],
+["I'm a bit nervous about tomorrow.","A2","","Don't worry. You'll do great."],
+["I know how you feel.","A2","Shows sympathy.","Thanks. That means a lot."],
+["I'm not sure I agree.","B1","A polite way to disagree.","Oh? What do you think?"],
+["To be honest, I preferred the first one.","B1","'To be honest' softens a frank opinion.",""],
+["I can't stand waiting in long queues.","B1","'Can't stand' is stronger than 'don't like'.","Neither can I."],
+["I'm so relieved that it's over.","B1","","I bet you are."]]},
+{id:'plans',name:'Making plans',blurb:'Invite, accept, refuse and change plans.',p:[
+["Are you free this weekend?","A1","","Yes. What did you have in mind?"],
+["Let's meet outside the cinema.","A1","","Okay. See you there."],
+["Do you want to grab a coffee after class?","A2","'Grab' is informal for 'get quickly'.","Sure, that sounds good."],
+["How about meeting at six o'clock?","A2","","Six works for me."],
+["I'll pick you up at seven.","A2","","Thanks. I'll be ready."],
+["I'm afraid I can't make it on Friday.","B1","A polite refusal.","No worries. Maybe another time."],
+["Could we reschedule for next week?","B1","","Sure. What day suits you?"],
+["Count me in!","B1","Informal. It means 'I'll join you'.","Great. The more the merrier."]]},
+{id:'help',name:'Asking for help',blurb:'Fix misunderstandings and ask what words mean.',p:[
+["Sorry, could you say that again?","A1","","Sure. I said it's on the second floor."],
+["Could you speak a little more slowly, please?","A1","","Sure. Is that better?"],
+["How do you spell that?","A1","","It's J-A-C-K-S-O-N."],
+["Excuse me, could you help me for a moment?","A1","","Of course. What do you need?"],
+["What does 'deadline' mean?","A2","","It's the last day to finish something."],
+["How do you say this word in English?","A2","",""],
+["Could you give me an example?","A2","","Sure. For example, I go to the gym on Mondays."],
+["I'm not sure I understand. Do you mean the second option?","B1","Check meaning by repeating it back.","Yes, exactly."]]}
+];
+
+/* turn: ['t', text] is the other person. ['y', best, [wrong, why], [wrong, why]] is you. */
+var DIALOGUES=[
+{id:'cafe',title:'Ordering at a café',level:'A1',setting:'You are at a café at lunchtime.',them:'Barista',turns:[
+['t',"Hi there! What can I get for you?"],
+['y',"Hi! Could I have a cappuccino, please?",["I want cappuccino.","This is too direct and it needs 'a'. 'Could I have…' sounds friendlier."],["Cappuccino. Now.","This sounds rude. Add 'please' and use a polite frame."]],
+['t',"Sure. Would you like anything to eat with that?"],
+['y',"Yes, I'll have a slice of carrot cake too, please.",["Yes, I am eating carrot cake.","This describes what you are doing now. It does not order anything."],["I will to have the cake.","After 'will' use the base verb: 'I'll have'."]],
+['t',"Great. Is that for here or to go?"],
+['y',"For here, thanks.",["Yes, please.","'Yes' does not answer a question with two choices."],["I am here.","This does not say whether you will eat in or take it away."]],
+['t',"That's four hundred and fifty rupees."],
+['y',"Can I pay by card?",["Do you card?","The verb is missing. Say 'Can I pay by card?'"],["Here is my money card.","People will understand, but it is not natural. Say 'Can I pay by card?'"]],
+['t',"Of course. Just tap here. Enjoy your cappuccino!"]]},
+{id:'directions',title:'Asking for directions',level:'A1',setting:'You are walking in an unfamiliar part of the city.',them:'Passer-by',turns:[
+['t',"You look a little lost. Can I help?"],
+['y',"Yes, please. How do I get to the central library?",["Yes. Where library?","Words are missing. 'How do I get to…?' is a natural frame."],["I am going library, which way?","You need 'to the': 'How do I get to the library?'"]],
+['t',"It's not far. Go straight for two blocks, then turn left at the traffic lights."],
+['y',"Sorry, could you say that again more slowly?",["What?","This is very abrupt. Add 'Sorry' and 'could you'."],["I don't speak English.","This shuts the conversation down. Ask the person to repeat instead."]],
+['t',"Of course. Straight on for two blocks. Then left at the lights."],
+['y',"Got it. Is it far on foot?",["How many foot?","Say 'on foot' or 'How long does it take to walk?'"],["It is far or not far?","The question form is wrong. Say 'Is it far?'"]],
+['t',"No, it's only about five minutes' walk."],
+['y',"Great. Thank you so much for your help!",["OK. Bye.","This is fine, but a little cold. A warm thank-you is better."],["You are welcome.","That is what the other person says after being thanked."]]]},
+{id:'colleague',title:'Meeting a new colleague',level:'A2',setting:'It is your first morning at a new job.',them:'Hamza',turns:[
+['t',"Hi, you must be the new teammate. I'm Hamza."],
+['y',"That's right. Nice to meet you, Hamza. I'm Sara.",["Yes. Sara.","This is too short. Greet the person and give your name in a full sentence."],["Nice meeting you before.","'Before' means you met earlier. For a first meeting say 'Nice to meet you'."]],
+['t',"Welcome to the team! How was your first morning?"],
+['y',"It's been good so far, but there's a lot to take in.",["It is finished.","This does not describe how the morning felt."],["I have been very good.","'Good' describes the morning. 'I have been good' sounds like behaviour."]],
+['t',"I know the feeling. Shall I show you where the kitchen is?"],
+['y',"That would be great, thanks.",["No, I show.","This is confusing and impolite. Accept or refuse politely."],["Yes, I shall.","'Shall' belongs in the offer. The reply is 'That would be great.'"]],
+['t',"We usually grab lunch together around one. Want to join us?"],
+['y',"I'd love to. Count me in!",["I am agree.","Say 'I agree', without 'am'. A better reply here is 'I'd love to.'"],["Maybe I join you not.","This is unclear. Say yes, or politely say no."]]]},
+{id:'pharmacy',title:'At the pharmacy',level:'A2',setting:'You have a sore throat and visit a pharmacy.',them:'Pharmacist',turns:[
+['t',"Good afternoon. How can I help you?"],
+['y',"Hi, I've had a sore throat since yesterday. Do you have anything for it?",["My throat is sick since yesterday.","Say 'I have a sore throat', and use 'I've had… since yesterday'."],["I need medicine now.","This is vague and demanding. Say what the problem is."]],
+['t',"I'm sorry to hear that. Are you allergic to any medicine?"],
+['y',"No, not that I know of.",["Yes, I am not.","This contradicts itself. Answer yes or no, then add detail."],["I don't allergic.","'Allergic' is an adjective. Say 'I'm not allergic to anything.'"]],
+['t',"Okay. These lozenges should help. Take one every three hours."],
+['y',"How many can I take in a day?",["How many times day?","Words are missing. Say 'How many can I take in a day?'"],["What day I take?","This asks about the day, not the amount."]],
+['t',"No more than six. If it isn't better in three days, see your doctor."],
+['y',"Okay, thank you. How much is that?",["Give me the price.","This is too blunt. Ask a question."],["How many is that?","'How many' asks about a number. 'How much' asks about a price."]]]},
+{id:'weekend',title:'Making plans with a friend',level:'A2',setting:'A friend calls to suggest dinner.',them:'Friend',turns:[
+['t',"Hey! Are you free on Saturday?"],
+['y',"I think so. What did you have in mind?",["Saturday is a day.","This is true but does not answer the invitation."],["Why you ask?","This sounds suspicious and the question form is wrong."]],
+['t',"There's a new Italian place downtown. Do you want to try it?"],
+['y',"Sounds great! What time were you thinking?",["It sounds like great.","Say 'Sounds great' or 'It sounds great'. Do not add 'like' before an adjective."],["Fine, I don't mind anything.","This gives no input. A question moves the plan forward."]],
+['t',"How about seven o'clock? I'll pick you up."],
+['y',"Seven works for me. Thanks for offering!",["Seven is working.","'Works for me' is the fixed phrase."],["I'm afraid I can't. See you at seven.","This refuses and then agrees."]],
+['t',"Perfect. Oh, and can I bring my cousin along?"],
+['y',"Sure, the more the merrier!",["No, I do not like.","This is rude and unclear. Answer the request itself."],["Yes, bring.","This needs an object or a fuller phrase, such as 'Sure, bring him along.'"]]]},
+{id:'return',title:'Returning an item',level:'B1',setting:'You return a jacket to a clothes shop.',them:'Shop assistant',turns:[
+['t',"Hello, how can I help you today?"],
+['y',"Hi, I'd like to return this jacket. It doesn't fit.",["I want back money for jacket.","People will understand, but it is awkward. Say 'I'd like to return…'."],["This jacket is bad.","This does not say what you want. State the problem and the request."]],
+['t',"No problem. Do you have the receipt with you?"],
+['y',"Yes, I do. Here you go.",["Yes, I have it, take.","Add 'here you go' or 'here it is' when you hand something over."],["No, I did buy it.","This is confusing. 'Did' needs a clear verb phrase after it."]],
+['t',"Thanks. Would you like a refund or an exchange?"],
+['y',"Could I exchange it for a larger size?",["Exchange me bigger.","'Exchange' needs 'it for…'. Say 'exchange it for a larger size'."],["Refund or exchange.","Repeating the question does not answer it. Choose one in a full sentence."]],
+['t',"Let me check. Yes, we have it in a large. Here you go."],
+['y',"Perfect, thank you for being so helpful.",["It's not a problem.","That is what you say when someone thanks you."],["Good job, shop worker.","This is too informal and a little patronising. Say 'thank you'."]]]}
+];
+
+/* In every exercise the first option is the correct one. It is shuffled when a session is built. */
+var GAPS=[
+{t:'greet',l:'A2',q:"How ___ you been lately?",o:["have","did","are"],w:"Present perfect: 'How have you been?' asks about the time up to now."},
+{t:'intro',l:'B1',q:"I ___ English for two years.",o:["have been learning","am learning","learn"],w:"'For two years' links the past to now, so use the present perfect continuous."},
+{t:'home',l:'A2',q:"It's my ___ to do the dishes.",o:["turn","time","change"],w:"'It's my turn' means it is your responsibility now, in order."},
+{t:'food',l:'A2',q:"Could we have the ___, please?",o:["bill","price","money"],w:"In a restaurant, the paper that shows what you owe is the 'bill' (British English) or the 'check' (American English)."},
+{t:'shop',l:'A2',q:"Do you have this ___ a larger size?",o:["in","on","at"],w:"We say 'in a larger size' and 'in blue'."},
+{t:'travel',l:'A2',q:"Does this bus ___ to the airport?",o:["go","goes","going"],w:"After 'does', use the base form of the verb: 'go'."},
+{t:'work',l:'B1',q:"I'll send you the report ___ the end of the day.",o:["by","until","at"],w:"'By' means no later than. 'Until' describes something that continues up to a time."},
+{t:'health',l:'B1',q:"I've had a headache ___ this morning.",o:["since","for","from"],w:"Use 'since' with a starting point (this morning) and 'for' with a length of time (three hours)."},
+{t:'phone',l:'A2',q:"Can I take a ___?",o:["message","word","letter"],w:"On the phone, 'take a message' means to write down what the caller wants to say."},
+{t:'feel',l:'B1',q:"I can't ___ waiting in long queues.",o:["stand","stay","stop"],w:"'Can't stand' means you strongly dislike something."},
+{t:'plans',l:'B1',q:"I'm afraid I can't make ___ on Friday.",o:["it","that","them"],w:"'Make it' is a fixed phrase meaning 'be able to come'."},
+{t:'help',l:'A1',q:"Could you speak a little more ___?",o:["slowly","slow","slower"],w:"Use the adverb 'slowly' after the verb 'speak'."}
+];
+var REPLIES=[
+{t:'greet',l:'A1',q:"A neighbour says: 'Hi, how's it going?'",o:["Pretty good, thanks. How about you?","I am going to the market.","It goes by bus."],w:"'How's it going?' is a friendly greeting. Say how you are, then ask back."},
+{t:'intro',l:'A1',q:"Someone you have just met says: 'Nice to meet you.'",o:["Nice to meet you too.","Thank you for the meeting.","Nice to see you before."],w:"Repeat the greeting back and add 'too'."},
+{t:'home',l:'A2',q:"Your flatmate says: 'Can you turn the volume down a little?'",o:["Sorry! Is that better?","No, it is the volume.","I will turn it down yesterday."],w:"A short apology and a check-back sounds natural."},
+{t:'food',l:'A1',q:"A waiter asks: 'Are you ready to order?'",o:["Yes, I'd like the grilled chicken, please.","Yes, I am ready for ordering you.","I will order the waiter."],w:"Say yes and give your order with 'I'd like'."},
+{t:'shop',l:'A2',q:"A shop assistant asks: 'Can I help you with anything?'",o:["I'm just looking, thanks.","I am looking you.","No, I don't help."],w:"'I'm just looking' politely says you do not need help yet."},
+{t:'travel',l:'A2',q:"A stranger asks: 'Do you know where the station is?'",o:["Sure. Go straight and turn left at the lights.","It is station.","Yes, I know the station."],w:"Give the directions. A bare 'yes' does not help the person."},
+{t:'work',l:'B1',q:"A colleague says: 'Could you walk me through the process?'",o:["Sure. First, you log in to the system.","Yes, I walk with you.","I am walking through."],w:"Agree, then explain step by step."},
+{t:'health',l:'B1',q:"The doctor asks: 'What seems to be the problem?'",o:["I've had a fever since yesterday.","I am fever from yesterday.","My fever is yesterday."],w:"Use 'I've had… since…' for a problem that started in the past and continues."},
+{t:'phone',l:'A2',q:"The caller says: 'Can I speak to Sara, please?' You are Sara.",o:["Speaking.","I am Sara speaking to you.","She is me."],w:"'Speaking' is the usual short answer when the caller asks for you."},
+{t:'feel',l:'A2',q:"Your friend says: 'I'm so nervous about my interview.'",o:["Don't worry. You'll do great.","That is not nervous.","Why you are nervous?"],w:"Offer encouragement. The other replies are unnatural or ignore the feeling."},
+{t:'plans',l:'A1',q:"A friend asks: 'Are you free this weekend?'",o:["Yes. What did you have in mind?","Yes, I am free price.","Weekend is Saturday."],w:"Answer, then ask about the plan."},
+{t:'help',l:'A2',q:"You hear a word you do not know. You say:",o:["Sorry, what does 'deadline' mean?","What? Deadline?","I don't know English."],w:"Start with 'Sorry' and use 'what does … mean?'"}
+];
+
+/* ================= Data helpers ================= */
+var TOPIC={}, ALL=[];
+TOPICS.forEach(function(t){TOPIC[t.id]=t;t.p.forEach(function(p,i){ALL.push({id:t.id+'-'+i,topic:t.id,text:p[0],level:p[1],note:p[2]||'',reply:p[3]||''});});});
+var DLG={}; DIALOGUES.forEach(function(d){DLG[d.id]=d;});
+var LEVELS=['A1','A2','B1'];
+
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function plural(n,w){return n+' '+w+(n===1?'':'s');}
+
+var IC={
+  speak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/></svg>'
+};
+function lvl(l){return '<span class="lvl" data-l="'+l+'" title="Level '+l+'">'+l+'<b></b><b></b><b></b></span>';}
+
+/* ================= Saved progress ================= */
+var KEY='everyday-english-guide.v1';
+function defaults(){return {learned:{},saved:{},dlg:{},sessions:[],days:{},audio:{accent:'US',slow:false}};}
+var S=(function(){
+  try{var r=localStorage.getItem(KEY);if(r){var o=JSON.parse(r);var d=defaults();for(var k in d){if(o&&o[k]!==undefined)d[k]=o[k];}return d;}}catch(e){}
+  return defaults();
+})();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function dkey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function markDay(){S.days[dkey(new Date())]=1;}
+function streak(){var n=0,d=new Date();if(!S.days[dkey(d)])d.setDate(d.getDate()-1);while(S.days[dkey(d)]){n++;d.setDate(d.getDate()-1);}return n;}
+function learnedCount(topic){return ALL.filter(function(p){return S.learned[p.id]&&(!topic||p.topic===topic);}).length;}
+function totalCount(topic){return ALL.filter(function(p){return !topic||p.topic===topic;}).length;}
+function savedCount(){return ALL.filter(function(p){return S.saved[p.id];}).length;}
+
+/* ================= Audio ================= */
+var synth=('speechSynthesis' in window&&'SpeechSynthesisUtterance' in window)?window.speechSynthesis:null;
+var voices=[], speakToken=0, currentMark=null, toastTimer=0;
+if(!synth)document.documentElement.classList.add('no-audio');
+function loadVoices(){if(!synth)return;voices=synth.getVoices().filter(function(v){return /^en/i.test(v.lang);});}
+if(synth){loadVoices();if(synth.addEventListener)synth.addEventListener('voiceschanged',loadVoices);else synth.onvoiceschanged=loadVoices;}
+function normLang(v){return v.lang.replace('_','-').toLowerCase();}
+function pickVoice(slot){
+  var want=S.audio.accent==='GB'?'en-gb':'en-us';
+  var pool=voices.filter(function(v){return normLang(v)===want;});
+  if(!pool.length)pool=voices;
+  if(!pool.length)return null;
+  return pool[slot%pool.length]||pool[0];
+}
+function toast(msg){
+  var t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.hidden=true;},2600);
+}
+function setMark(el){
+  if(currentMark&&currentMark!==el)currentMark.classList.remove('speaking');
+  currentMark=el||null;
+  if(currentMark)currentMark.classList.add('speaking');
+}
+function speak(text,o){
+  o=o||{};
+  if(!synth){toast("Audio is not available in this browser.");return false;}
+  if(!o.chain){speakToken++;setMark(o.mark||null);}
+  synth.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  var v=pickVoice(o.slot||0);
+  u.lang=S.audio.accent==='GB'?'en-GB':'en-US';
+  if(v){u.voice=v;u.lang=v.lang;}
+  u.rate=o.rate||(S.audio.slow?0.7:0.95);
+  u.pitch=o.pitch||1;
+  var done=function(){if(!o.chain&&o.mark&&currentMark===o.mark)setMark(null);if(o.onend)o.onend();};
+  u.onend=done;u.onerror=done;
+  setTimeout(function(){synth.speak(u);},30);
+  return true;
+}
+function stopSpeech(){speakToken++;setMark(null);if(synth)synth.cancel();}
+function playLines(lines,onLine,onDone){
+  var my=++speakToken,i=0;
+  (function next(){
+    if(my!==speakToken)return;
+    if(i>=lines.length){onDone();return;}
+    var l=lines[i];onLine(i);i++;
+    if(!speak(l.text,{slot:l.slot,pitch:l.pitch,chain:true,onend:next}))onDone();
+  })();
+}
+function markFor(el){
+  var b=el.closest('.bubble');if(b)return b;
+  var host=el.closest('.row,.potd,.missed li');
+  return host?host.querySelector('.say-target'):null;
+}
+
+/* ================= Router ================= */
+var app=$('#app'), current='today';
+var VIEWS={today:renderToday,phrasebook:renderPhrasebook,dialogues:renderDialogues,practice:renderPractice,progress:renderProgress};
+function route(){
+  var h=(location.hash||'#today').slice(1);
+  current=VIEWS[h]?h:'today';
+  stopSpeech();dlgPlaying=false;
+  $$('.tabs a').forEach(function(a){if(a.dataset.view===current)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  VIEWS[current]();
+  window.scrollTo(0,0);
+}
+function go(name){if(location.hash==='#'+name)route();else location.hash='#'+name;}
+
+/* ================= Today ================= */
+function dayNum(){var n=new Date();return Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/864e5);}
+function renderToday(){
+  var p=ALL[(dayNum()*7)%ALL.length], tp=TOPIC[p.topic];
+  var tiles=TOPICS.map(function(t){
+    var n=learnedCount(t.id),m=totalCount(t.id);
+    return '<button class="tile" data-act="topic-go" data-topic="'+t.id+'"><strong>'+esc(t.name)+'</strong>'+
+      '<div class="bar"><i data-bar-for="'+t.id+'" style="--w:'+(n/m*100)+'%"></i></div>'+
+      '<small data-count-for="'+t.id+'">'+n+' of '+m+' learned</small></button>';
+  }).join('');
+  app.innerHTML=
+  '<h1>Today\'s phrase</h1>'+
+  '<p class="lede">One useful sentence a day. Listen to it, say it out loud, then use it in a real conversation.</p>'+
+  '<div class="today-grid">'+
+    '<section class="potd" aria-label="Phrase of the day">'+
+      '<p class="eyebrow">'+esc(tp.name)+' · '+lvl(p.level)+'</p>'+
+      '<p class="potd-text"><span class="hl say-target">'+esc(p.text)+'</span></p>'+
+      (p.note?'<p class="potd-note">'+esc(p.note)+'</p>':'')+
+      (p.reply?'<p class="potd-reply"><span class="eyebrow">Typical reply</span><span>'+esc(p.reply)+'</span></p>':'')+
+      '<div class="btn-row">'+
+        '<button class="btn" data-act="speak" data-say="'+esc(p.text)+'">'+IC.speak+'Listen</button>'+
+        '<button class="btn sec" data-act="speak" data-slow="1" data-say="'+esc(p.text)+'">Listen slowly</button>'+
+        '<button class="btn sec txt" data-act="learn" data-id="'+p.id+'" aria-pressed="'+!!S.learned[p.id]+'">'+(S.learned[p.id]?'Learned':'Mark as learned')+'</button>'+
+      '</div>'+
+    '</section>'+
+    '<aside class="snap" aria-label="Your progress">'+
+      '<div><span>Day streak</span><b>'+streak()+'</b></div>'+
+      '<div><span>Phrases learned</span><b data-total-learned>'+learnedCount()+'<small style="font-size:1rem;color:var(--ink-2);font-weight:500"> / '+ALL.length+'</small></b></div>'+
+      '<div><span>Saved for later</span><b>'+savedCount()+'</b></div>'+
+    '</aside>'+
+  '</div>'+
+  '<section class="section-gap"><h2>Three ways to practise</h2><div class="actions3">'+
+    '<a class="action" href="#phrasebook"><strong>Read and listen</strong><span>Browse '+ALL.length+' phrases by topic and level. Tap the speaker to hear each one.</span></a>'+
+    '<a class="action" href="#dialogues"><strong>Role-play a conversation</strong><span>Choose your side of a real exchange and pick the most natural reply.</span></a>'+
+    '<a class="action" href="#practice"><strong>Take a quick quiz</strong><span>Eight questions: fill the gap, choose the reply, order the words, listen.</span></a>'+
+  '</div></section>'+
+  '<section class="section-gap"><h2>Topics</h2><div class="topic-grid">'+tiles+'</div></section>';
+}
+
+/* ================= Phrasebook ================= */
+var pb={q:'',level:'All',topic:'all',show:'all'};
+function chipGroup(label,act,items,cur){
+  return '<div class="fgroup" role="group" aria-label="'+label+'">'+items.map(function(it){
+    return '<button class="chip" data-act="'+act+'" data-v="'+it[0]+'" aria-pressed="'+(cur===it[0])+'">'+esc(it[1])+'</button>';
+  }).join('')+'</div>';
+}
+function renderPhrasebook(){
+  var topicItems=[['all','All topics']].concat(TOPICS.map(function(t){return [t.id,t.name];}));
+  app.innerHTML=
+  '<h1>Phrasebook</h1>'+
+  '<p class="lede">'+ALL.length+' sentences for everyday situations. Listen to a phrase, save the ones you want to revisit, and mark the ones you have learned.</p>'+
+  '<div class="toolbar">'+
+    '<label class="sr" for="pbSearch">Search phrases</label>'+
+    '<input id="pbSearch" class="search" type="search" placeholder="Search, for example: ticket, doctor, late" value="'+esc(pb.q)+'" autocomplete="off">'+
+    '<div class="filters">'+
+      chipGroup('Level','pb-level',[['All','All levels'],['A1','A1'],['A2','A2'],['B1','B1']],pb.level)+
+      chipGroup('Show','pb-show',[['all','All'],['todo','To learn'],['saved','Saved']],pb.show)+
+    '</div>'+
+    '<div class="scroll" role="group" aria-label="Topic">'+topicItems.map(function(it){
+      return '<button class="chip" data-act="pb-topic" data-v="'+it[0]+'" aria-pressed="'+(pb.topic===it[0])+'">'+esc(it[1])+'</button>';
+    }).join('')+'</div>'+
+  '</div>'+
+  '<p class="count-line" id="pbCount" aria-live="polite"></p>'+
+  '<div id="pbList"></div>';
+  renderPBList();
+}
+function hlText(text,q){
+  if(!q)return esc(text);
+  var lo=text.toLowerCase(),ql=q.toLowerCase(),out='',i=0,k;
+  while((k=lo.indexOf(ql,i))!==-1){out+=esc(text.slice(i,k))+'<mark>'+esc(text.slice(k,k+q.length))+'</mark>';i=k+q.length;}
+  return out+esc(text.slice(i));
+}
+function rowHTML(p,q){
+  var L=!!S.learned[p.id],V=!!S.saved[p.id];
+  return '<li class="row'+(L?' is-learned':'')+'" data-id="'+p.id+'">'+
+    '<div class="row-main">'+
+      '<p class="phrase say-target">'+hlText(p.text,q)+'</p>'+
+      (p.note?'<p class="note">'+hlText(p.note,q)+'</p>':'')+
+      '<div class="row-meta">'+lvl(p.level)+(p.reply?'<button class="link" data-act="reply" aria-expanded="false">Typical reply</button>':'')+'</div>'+
+      (p.reply?'<div class="reply" hidden><span>'+hlText(p.reply,q)+'</span><button class="icon" data-act="speak" data-slot="1" data-say="'+esc(p.reply)+'" aria-label="Listen to the reply" title="Listen to the reply">'+IC.speak+'</button></div>':'')+
+    '</div>'+
+    '<div class="row-actions">'+
+      '<button class="icon" data-act="speak" data-say="'+esc(p.text)+'" aria-label="Listen to this phrase" title="Listen">'+IC.speak+'</button>'+
+      '<button class="icon save" data-act="save" data-id="'+p.id+'" aria-pressed="'+V+'" aria-label="Save this phrase" title="Save for later">'+IC.star+'</button>'+
+      '<button class="icon learn" data-act="learn" data-id="'+p.id+'" aria-pressed="'+L+'" aria-label="Mark as learned" title="Mark as learned">'+IC.check+'</button>'+
+    '</div></li>';
+}
+function renderPBList(){
+  var q=pb.q.trim(),ql=q.toLowerCase(),groups=[],total=0;
+  TOPICS.forEach(function(t){
+    if(pb.topic!=='all'&&t.id!==pb.topic)return;
+    var items=ALL.filter(function(p){
+      if(p.topic!==t.id)return false;
+      if(pb.level!=='All'&&p.level!==pb.level)return false;
+      if(pb.show==='saved'&&!S.saved[p.id])return false;
+      if(pb.show==='todo'&&S.learned[p.id])return false;
+      if(ql&&(p.text+' '+p.note+' '+p.reply).toLowerCase().indexOf(ql)===-1)return false;
+      return true;
+    });
+    if(items.length){groups.push({t:t,items:items});total+=items.length;}
+  });
+  $('#pbCount').textContent=total?plural(total,'phrase')+' in '+plural(groups.length,'topic'):'';
+  if(!groups.length){
+    $('#pbList').innerHTML='<div class="empty"><p>No phrases match. Try a different word, or clear the filters.</p><button class="btn sec" data-act="pb-clear">Clear filters</button></div>';
+    return;
+  }
+  $('#pbList').innerHTML=groups.map(function(g){
+    var n=learnedCount(g.t.id),m=totalCount(g.t.id);
+    return '<section class="topic" aria-labelledby="h-'+g.t.id+'">'+
+      '<div class="topic-head"><h2 id="h-'+g.t.id+'">'+esc(g.t.name)+'</h2><p class="blurb">'+esc(g.t.blurb)+'</p><span class="tcount" data-count-for="'+g.t.id+'">'+n+' of '+m+' learned</span></div>'+
+      '<ul class="rows">'+g.items.map(function(p){return rowHTML(p,q);}).join('')+'</ul></section>';
+  }).join('');
+}
+function refreshCounts(){
+  TOPICS.forEach(function(t){
+    var n=learnedCount(t.id),m=totalCount(t.id);
+    $$('[data-count-for="'+t.id+'"]').forEach(function(el){el.textContent=n+' of '+m+' learned';});
+    $$('[data-bar-for="'+t.id+'"]').forEach(function(el){el.style.setProperty('--w',(n/m*100)+'%');});
+  });
+  $$('[data-total-learned]').forEach(function(el){el.firstChild.nodeValue=String(learnedCount());});
+}
+
+/* ================= Dialogues ================= */
+var dlg=null, dlgPlaying=false, rp=null;
+function renderDialogues(){
+  if(!dlg){
+    app.innerHTML=
+    '<h1>Dialogues</h1>'+
+    '<p class="lede">Short conversations from daily life. Read and listen to the whole exchange, then play your part and choose the most natural reply.</p>'+
+    '<ul class="dlg-list">'+DIALOGUES.map(function(d){
+      var b=S.dlg[d.id],youN=d.turns.filter(function(t){return t[0]==='y';}).length;
+      return '<li><button class="dlg-item" data-act="dlg-open" data-id="'+d.id+'">'+
+        '<h2>'+esc(d.title)+'</h2><p>'+esc(d.setting)+'</p>'+
+        '<span class="side">'+lvl(d.level)+'<span>'+plural(d.turns.length,'line')+'</span>'+(b?'<span>Best: '+b.best+' of '+b.total+'</span>':'')+'</span></button></li>';
+    }).join('')+'</ul>';
+    return;
+  }
+  var d=DLG[dlg.id];
+  app.innerHTML=
+  '<button class="link back" data-act="dlg-back">← All dialogues</button>'+
+  '<h1>'+esc(d.title)+'</h1>'+
+  '<p class="lede">'+esc(d.setting)+' '+lvl(d.level)+'</p>'+
+  '<div class="seg" role="group" aria-label="Mode">'+
+    '<button data-act="dlg-mode" data-v="read" aria-pressed="'+(dlg.mode==='read')+'">Read and listen</button>'+
+    '<button data-act="dlg-mode" data-v="play" aria-pressed="'+(dlg.mode==='play')+'">Role-play</button>'+
+  '</div>'+
+  '<div id="dlgBody"></div>';
+  renderDlgBody();
+}
+function bubbleHTML(d,t,i,withAudio){
+  var you=t[0]==='y';
+  return '<li class="bubble '+(you?'you':'them')+'" data-i="'+i+'"><span class="who">'+(you?'You':esc(d.them))+'</span><p>'+esc(t[1])+'</p>'+
+    (withAudio?'<button class="icon" data-act="speak" data-slot="'+(you?1:0)+'" data-say="'+esc(t[1])+'" aria-label="Listen to this line" title="Listen">'+IC.speak+'</button>':'')+'</li>';
+}
+function renderDlgBody(){
+  var d=DLG[dlg.id],box=$('#dlgBody');
+  stopSpeech();dlgPlaying=false;
+  if(dlg.mode==='read'){
+    box.innerHTML=
+    '<div class="dlg-bar"><button class="btn needs-audio" id="playAll" data-act="dlg-playall">'+IC.speak+'Play whole dialogue</button><span class="fine">You are the speaker on the right.</span></div>'+
+    '<ol class="chat">'+d.turns.map(function(t,i){return bubbleHTML(d,t,i,true);}).join('')+'</ol>';
+  }else{
+    startRP();
+  }
+}
+function startRP(){
+  var d=DLG[dlg.id];
+  rp={i:0,shown:[],opts:null,wrong:false,first:0,total:d.turns.filter(function(t){return t[0]==='y';}).length,done:false,tried:{}};
+  advanceRP();
+}
+function advanceRP(){
+  var d=DLG[dlg.id];
+  rp.opts=null;rp.wrong=false;rp.tried={};
+  while(rp.i<d.turns.length){
+    var t=d.turns[rp.i];
+    if(t[0]==='t'){rp.shown.push(rp.i);rp.i++;continue;}
+    rp.opts=shuffle([{t:t[1],ok:true},{t:t[2][0],ok:false,why:t[2][1]},{t:t[3][0],ok:false,why:t[3][1]}]);
+    break;
+  }
+  if(rp.i>=d.turns.length){
+    rp.done=true;
+    var prev=S.dlg[d.id];
+    S.dlg[d.id]={best:Math.max(prev?prev.best:0,rp.first),total:rp.total,at:Date.now()};
+    markDay();save();
+  }
+  drawRP();
+}
+function drawRP(){
+  var d=DLG[dlg.id],box=$('#dlgBody');
+  var html='<ol class="chat" style="margin-top:18px">'+rp.shown.map(function(i){return bubbleHTML(d,d.turns[i],i,true);}).join('')+'</ol>';
+  if(rp.done){
+    html+='<div class="summary"><p class="eyebrow">Finished</p><p style="margin:0"><b>'+rp.first+' of '+rp.total+'</b></p>'+
+      '<p style="margin:0">You chose the most natural reply on the first try '+rp.first+' times out of '+rp.total+'.</p>'+
+      '<div class="btn-row"><button class="btn" data-act="dlg-restart">Try again</button><button class="btn sec" data-act="dlg-mode" data-v="read">Read and listen</button></div></div>';
+  }else{
+    html+='<div class="turn"><h3>Your turn. Choose the best reply.</h3><div class="opts">'+rp.opts.map(function(o,k){
+      var tried=rp.tried[k];
+      return '<div><button class="opt'+(tried?' bad':'')+'" data-act="dlg-pick" data-k="'+k+'"'+(tried?' disabled':'')+'>'+esc(o.t)+'</button>'+(tried?'<p class="why">'+esc(o.why)+'</p>':'')+'</div>';
+    }).join('')+'</div></div>';
+  }
+  box.innerHTML=html;
+}
+
+/* ================= Practice ================= */
+var pr={topic:'all',level:'All'}, ps=null;
+function isOrderable(p){
+  var n=p.text.split(' ').length,marks=(p.text.match(/[.!?]/g)||[]).length;
+  return n>=4&&n<=10&&marks===1&&/[.!?]$/.test(p.text);
+}
+function matchPool(){
+  var okT=function(x){return pr.topic==='all'||x.t===pr.topic;},okL=function(x){return pr.level==='All'||x.l===pr.level;};
+  var phr=ALL.filter(function(p){return (pr.topic==='all'||p.topic===pr.topic)&&(pr.level==='All'||p.level===pr.level);});
+  return {gap:GAPS.filter(function(g){return okT(g)&&okL(g);}),reply:REPLIES.filter(function(g){return okT(g)&&okL(g);}),order:phr.filter(isOrderable),listen:synth?phr:[]};
+}
+function poolSize(){var p=matchPool();return p.gap.length+p.reply.length+p.order.length+p.listen.length;}
+function mkOpts(o){return shuffle(o.map(function(x,i){return {text:x,ok:i===0};}));}
+function buildSession(){
+  var p=matchPool(),used={};
+  var c={
+    gap:shuffle(p.gap).map(function(g){return {type:'gap',q:g.q,w:g.w,opts:mkOpts(g.o)};}),
+    reply:shuffle(p.reply).map(function(g){return {type:'reply',q:g.q,w:g.w,opts:mkOpts(g.o)};}),
+    order:shuffle(p.order).map(function(ph){
+      var tokens=ph.text.split(' '),idx=tokens.map(function(_,i){return i;}),bank;
+      do{bank=shuffle(idx);}while(bank.join()===idx.join());
+      return {type:'order',phrase:ph,tokens:tokens,bank:bank,placed:[]};
+    }),
+    listen:shuffle(p.listen).map(function(ph){
+      var d=shuffle(ALL.filter(function(x){return x.id!==ph.id&&x.topic===ph.topic;})).slice(0,2);
+      return {type:'listen',phrase:ph,opts:shuffle([ph].concat(d).map(function(x){return {text:x.text,ok:x===ph};}))};
+    })
+  };
+  var types=shuffle(['gap','reply','order','listen']),items=[],guard=0;
+  while(items.length<8&&guard++<60){
+    var added=false;
+    for(var k=0;k<types.length&&items.length<8;k++){
+      var q=c[types[k]],it;
+      while((it=q.shift())){
+        if(it.phrase){if(used[it.phrase.id])continue;used[it.phrase.id]=1;}
+        items.push(it);added=true;break;
+      }
+    }
+    if(!added)break;
+  }
+  return shuffle(items);
+}
+function renderPractice(){
+  if(ps&&ps.done)return drawResults();
+  if(ps)return drawQuestion();
+  var last=S.sessions[0];
+  app.innerHTML=
+  '<h1>Practice</h1>'+
+  '<p class="lede">Eight quick questions: fill the gap, choose the reply, put the words in order, and listen. Pick a topic and a level, or leave both on all.</p>'+
+  '<div class="setup">'+
+    '<div class="group"><p class="eyebrow">Topic</p><div class="fgroup" role="group" aria-label="Topic">'+
+      [['all','All topics']].concat(TOPICS.map(function(t){return [t.id,t.name];})).map(function(it){return '<button class="chip" data-act="pr-topic" data-v="'+it[0]+'" aria-pressed="'+(pr.topic===it[0])+'">'+esc(it[1])+'</button>';}).join('')+
+    '</div></div>'+
+    '<div class="group"><p class="eyebrow">Level</p>'+chipGroup('Level','pr-level',[['All','All levels'],['A1','A1'],['A2','A2'],['B1','B1']],pr.level)+'</div>'+
+    '<div class="btn-row" style="align-items:center"><button class="btn" id="prStart" data-act="pr-start">Start practice</button><span class="fine" id="prCount" aria-live="polite"></span></div>'+
+    (last?'<p class="fine">Last session: '+last.correct+' of '+last.total+' on '+new Date(last.at).toLocaleDateString(undefined,{day:'numeric',month:'short'})+'.</p>':'')+
+  '</div>';
+  updateSetup();
+}
+function updateSetup(){
+  var n=poolSize(),b=$('#prStart'),c=$('#prCount');
+  if(!b)return;
+  b.disabled=n<3;
+  c.textContent=n<3?'Too few questions match. Choose another topic or level.':plural(n,'question')+' available';
+}
+function drawQuestion(){
+  var it=ps.items[ps.i],n=ps.items.length,last=ps.i===n-1;
+  var head='<div class="qhead"><span>Question '+(ps.i+1)+' of '+n+'</span><div class="bar"><i style="--w:'+(ps.i/n*100)+'%"></i></div></div>';
+  var body='',fb='';
+  function optBtns(){
+    return '<div class="opts">'+it.opts.map(function(o,k){
+      var cls='opt';
+      if(it.answered){if(o.ok)cls+=' ok';else if(it.picked===k)cls+=' bad';}
+      return '<button class="'+cls+'" data-act="pr-pick" data-k="'+k+'"'+(it.answered?' disabled':'')+'>'+esc(o.text)+'</button>';
+    }).join('')+'</div>';
+  }
+  if(it.type==='gap'){
+    var parts=it.q.split('___'),right=it.opts.filter(function(o){return o.ok;})[0].text;
+    var fill=it.answered?esc(right):'&nbsp;';
+    body='<p class="eyebrow qtype">Fill the gap</p><p class="qtext">'+esc(parts[0])+'<span class="blank">'+fill+'</span>'+esc(parts[1]||'')+'</p>'+optBtns();
+    if(it.answered)fb=it.w;
+  }else if(it.type==='reply'){
+    body='<p class="eyebrow qtype">Choose the most natural reply</p><p class="situation">'+esc(it.q)+'</p>'+optBtns();
+    if(it.answered)fb=it.w;
+  }else if(it.type==='listen'){
+    body='<p class="eyebrow qtype">Listen and choose what you hear</p>'+
+      '<div class="btn-row"><button class="btn" data-act="pr-play">'+IC.speak+'Play</button><button class="btn sec" data-act="pr-play" data-slow="1">Play slowly</button></div>'+optBtns();
+    if(it.answered)fb=it.ok?'You heard it correctly.':'You heard: '+it.phrase.text;
+  }else{
+    var placed=it.placed.map(function(i){return '<button class="tok" data-act="pr-unplace" data-i="'+i+'"'+(it.answered?' disabled':'')+'>'+esc(it.tokens[i])+'</button>';}).join('');
+    var bank=it.bank.filter(function(i){return it.placed.indexOf(i)===-1;}).map(function(i){return '<button class="tok" data-act="pr-place" data-i="'+i+'"'+(it.answered?' disabled':'')+'>'+esc(it.tokens[i])+'</button>';}).join('');
+    body='<p class="eyebrow qtype">Put the words in order</p><p class="qtext" style="font-size:1.1rem">Tap the words to build the sentence.</p>'+
+      '<div class="slot" aria-label="Your sentence">'+placed+'</div><div class="bank" aria-label="Word bank">'+bank+'</div>'+
+      (it.answered?'':'<div class="btn-row"><button class="btn" data-act="pr-check"'+(it.placed.length===it.tokens.length?'':' disabled')+'>Check</button></div>');
+    if(it.answered)fb=it.ok?'That is the sentence.':'The correct order is: '+it.phrase.text;
+  }
+  var out='';
+  if(it.answered){
+    out='<div class="fb '+(it.ok?'good':'bad')+'" role="status"><strong>'+(it.ok?'Correct':'Not quite')+'</strong><p>'+esc(fb)+'</p></div>'+
+      '<div class="btn-row"><button class="btn" id="nextBtn" data-act="pr-next">'+(last?'See results':'Next question')+'</button>'+
+      (it.phrase?'<button class="btn sec" data-act="speak" data-say="'+esc(it.phrase.text)+'">'+IC.speak+'Hear it</button>':'')+'</div>';
+  }
+  app.innerHTML='<h1 class="sr">Practice</h1>'+head+'<div class="qcard">'+body+out+'</div>';
+  if(it.answered){var nb=$('#nextBtn');if(nb)nb.focus({preventScroll:true});}
+}
+function finishSession(){
+  ps.done=true;
+  S.sessions.unshift({at:Date.now(),correct:ps.correct,total:ps.items.length,topic:pr.topic,level:pr.level});
+  S.sessions=S.sessions.slice(0,30);
+  markDay();save();
+}
+function correctText(it){
+  if(it.type==='gap'){var r=it.opts.filter(function(o){return o.ok;})[0].text;return it.q.replace('___',r);}
+  if(it.type==='reply')return it.opts.filter(function(o){return o.ok;})[0].text;
+  return it.phrase.text;
+}
+function drawResults(){
+  var n=ps.items.length,pct=ps.correct/n;
+  var msg=pct===1?'Perfect score.':pct>=.75?'Solid work. A little review will close the gaps.':pct>=.5?'Good start. Review the missed items and try again.':'Keep going. Read and listen to the phrases below, then try again.';
+  var missed=ps.items.filter(function(i){return !i.ok;});
+  var phraseMissed=missed.filter(function(i){return i.phrase;});
+  app.innerHTML='<h1 class="sr">Results</h1>'+
+    '<div class="qcard"><p class="eyebrow">Session complete</p><p class="score">'+ps.correct+' / '+n+'</p><div class="bar"><i style="--w:'+(pct*100)+'%"></i></div><p style="margin:0">'+msg+'</p>'+
+    (missed.length?'<h2 style="font-size:1.1rem">To review</h2><ul class="missed">'+missed.map(function(it){
+      var label=it.type==='gap'?'Fill the gap':it.type==='reply'?'Reply':it.type==='order'?'Word order':'Listening';
+      return '<li><p class="say-target"><small>'+label+(it.type==='reply'?': '+esc(it.q):'')+'</small>'+esc(correctText(it))+'</p>'+
+        '<button class="icon" data-act="speak" data-say="'+esc(correctText(it))+'" aria-label="Listen" title="Listen">'+IC.speak+'</button></li>';
+    }).join('')+'</ul>':'')+
+    '<div class="btn-row"><button class="btn" data-act="pr-again">Practise again</button>'+
+    '<button class="btn sec" data-act="pr-setup">Change topic or level</button>'+
+    (phraseMissed.length?'<button class="btn sec" data-act="pr-savemissed">Save missed phrases</button>':'')+'</div></div>';
+}
+
+/* ================= Progress ================= */
+function renderProgress(){
+  var l=learnedCount(),days=[],i;
+  for(i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);days.push({d:d,on:!!S.days[dkey(d)],today:i===0});}
+  var sessions=S.sessions.slice(0,10).reverse();
+  var avg=S.sessions.length?Math.round(S.sessions.slice(0,10).reduce(function(a,s){return a+s.correct/s.total;},0)/Math.min(10,S.sessions.length)*100):null;
+  var done=DIALOGUES.filter(function(d){return S.dlg[d.id];}).length;
+  app.innerHTML=
+  '<h1>Progress</h1>'+
+  '<p class="lede">Your progress is saved in this browser on this device.</p>'+
+  '<div class="stats">'+
+    '<div class="stat"><b>'+streak()+'</b><span>Day streak</span></div>'+
+    '<div class="stat"><b>'+l+'<small style="font-size:1rem;color:var(--ink-2);font-weight:500"> / '+ALL.length+'</small></b><span>Phrases learned</span></div>'+
+    '<div class="stat"><b>'+done+'<small style="font-size:1rem;color:var(--ink-2);font-weight:500"> / '+DIALOGUES.length+'</small></b><span>Dialogues played</span></div>'+
+    '<div class="stat"><b>'+(avg===null?'–':avg+'%')+'</b><span>Practice accuracy</span></div>'+
+  '</div>'+
+  '<section><h2>This week</h2><div class="week" role="list" aria-label="Days you practised this week">'+days.map(function(x){
+    return '<div class="day'+(x.on?' on':'')+(x.today?' today':'')+'" role="listitem" aria-label="'+x.d.toLocaleDateString(undefined,{weekday:'long'})+(x.on?', practised':', no practice')+'"><i></i>'+x.d.toLocaleDateString(undefined,{weekday:'short'})+'</div>';
+  }).join('')+'</div></section>'+
+  '<section class="section-gap"><h2>By topic</h2><ul class="prog-list">'+TOPICS.map(function(t){
+    var n=learnedCount(t.id),m=totalCount(t.id);
+    return '<li><span>'+esc(t.name)+'</span><div class="bar"><i style="--w:'+(n/m*100)+'%"></i></div><small>'+n+' of '+m+'</small></li>';
+  }).join('')+'</ul></section>'+
+  '<section class="section-gap"><h2>Practice sessions</h2>'+
+  (sessions.length?
+    '<div class="spark" role="img" aria-label="Accuracy of your last '+sessions.length+' sessions, oldest first">'+sessions.map(function(s){
+      var p=Math.round(s.correct/s.total*100);
+      return '<div><span>'+p+'%</span><i style="height:'+Math.max(3,p*.8)+'px"></i></div>';
+    }).join('')+'</div>'+
+    '<ul class="hist">'+S.sessions.slice(0,8).map(function(s){
+      return '<li><span>'+s.correct+' of '+s.total+'<br><small>'+(s.topic==='all'?'All topics':esc(TOPIC[s.topic].name))+' · '+(s.level==='All'?'All levels':s.level)+'</small></span><small>'+new Date(s.at).toLocaleDateString(undefined,{day:'numeric',month:'short'})+'</small></li>';
+    }).join('')+'</ul>'
+  :'<p class="fine">No sessions yet. <a href="#practice" style="color:var(--accent)">Start a practice session</a> and your scores will appear here.</p>')+
+  '</section>'+
+  '<section class="section-gap"><h2>Saved phrases</h2>'+savedHTML()+'</section>'+
+  '<section class="section-gap"><button class="btn sec" data-act="reset-ask">Reset my progress</button><div id="resetBox"></div></section>';
+}
+function savedHTML(){
+  var s=ALL.filter(function(p){return S.saved[p.id];});
+  if(!s.length)return '<p class="fine">Nothing saved yet. Tap the star beside any phrase in the Phrasebook.</p>';
+  return '<ul class="rows" style="max-width:720px">'+s.map(function(p){return rowHTML(p,'');}).join('')+'</ul>';
+}
+
+/* ================= Events ================= */
+function closeAudio(){var p=$('#audioPanel'),b=$('#audioBtn');if(p&&!p.hidden){p.hidden=true;b.setAttribute('aria-expanded','false');}}
+function syncAudioUI(){
+  $$('[data-act="audio-accent"]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===S.audio.accent));});
+  $$('[data-act="audio-speed"]').forEach(function(b){b.setAttribute('aria-pressed',String((b.dataset.v==='1')===S.audio.slow));});
+}
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.audio-wrap'))closeAudio();
+  var el=e.target.closest('[data-act]');
+  if(!el)return;
+  var a=el.dataset.act,id=el.dataset.id,v=el.dataset.v;
+  switch(a){
+    case 'audio-toggle':{var p=$('#audioPanel');p.hidden=!p.hidden;el.setAttribute('aria-expanded',String(!p.hidden));break;}
+    case 'audio-accent':S.audio.accent=v;save();syncAudioUI();break;
+    case 'audio-speed':S.audio.slow=v==='1';save();syncAudioUI();break;
+    case 'audio-test':speak('Hello! This is how I sound.');break;
+    case 'speak':speak(el.dataset.say,{slot:+(el.dataset.slot||0),rate:el.dataset.slow?0.7:undefined,pitch:(+(el.dataset.slot||0))?1.08:1,mark:markFor(el)});break;
+    case 'topic-go':pb={q:'',level:'All',topic:el.dataset.topic,show:'all'};go('phrasebook');break;
+    case 'learn':{
+      var on=!S.learned[id];if(on){S.learned[id]=1;markDay();}else delete S.learned[id];save();
+      $$('[data-act="learn"][data-id="'+id+'"]').forEach(function(b){b.setAttribute('aria-pressed',String(on));if(b.classList.contains('txt'))b.textContent=on?'Learned':'Mark as learned';});
+      $$('.row[data-id="'+id+'"]').forEach(function(r){r.classList.toggle('is-learned',on);});
+      refreshCounts();break;}
+    case 'save':{
+      var sv=!S.saved[id];if(sv)S.saved[id]=1;else delete S.saved[id];save();
+      $$('[data-act="save"][data-id="'+id+'"]').forEach(function(b){b.setAttribute('aria-pressed',String(sv));});
+      break;}
+    case 'reply':{
+      var rep=el.closest('.row-main').querySelector('.reply'),open=rep.hidden;
+      rep.hidden=!open;el.setAttribute('aria-expanded',String(open));break;}
+    case 'pb-level':pb.level=v;$$('[data-act="pb-level"]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v));});renderPBList();break;
+    case 'pb-show':pb.show=v;$$('[data-act="pb-show"]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v));});renderPBList();break;
+    case 'pb-topic':pb.topic=v;$$('[data-act="pb-topic"]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v));});renderPBList();break;
+    case 'pb-clear':pb={q:'',level:'All',topic:'all',show:'all'};renderPhrasebook();break;
+
+    case 'dlg-open':dlg={id:id,mode:'read'};renderDialogues();window.scrollTo(0,0);break;
+    case 'dlg-back':stopSpeech();dlg=null;renderDialogues();break;
+    case 'dlg-mode':dlg.mode=v;$$('[data-act="dlg-mode"]').forEach(function(b){if(b.parentNode.classList.contains('seg'))b.setAttribute('aria-pressed',String(b.dataset.v===v));});renderDlgBody();break;
+    case 'dlg-restart':startRP();break;
+    case 'dlg-pick':{
+      var k=+el.dataset.k,o=rp.opts[k];
+      if(o.ok){
+        if(!rp.wrong)rp.first++;
+        rp.shown.push(rp.i);rp.i++;advanceRP();
+      }else{rp.wrong=true;rp.tried[k]=true;drawRP();}
+      break;}
+    case 'dlg-playall':{
+      if(dlgPlaying){stopSpeech();dlgPlaying=false;el.lastChild.nodeValue='Play whole dialogue';$$('.bubble.speaking').forEach(function(b){b.classList.remove('speaking');});break;}
+      var d=DLG[dlg.id];dlgPlaying=true;el.lastChild.nodeValue='Stop';
+      var lis=$$('.chat .bubble');
+      var finish=function(){dlgPlaying=false;lis.forEach(function(b){b.classList.remove('speaking');});var pa=$('#playAll');if(pa)pa.lastChild.nodeValue='Play whole dialogue';};
+      playLines(d.turns.map(function(t){return {text:t[1],slot:t[0]==='y'?1:0,pitch:t[0]==='y'?1.08:1};}),
+        function(i){lis.forEach(function(b,j){b.classList.toggle('speaking',i===j);});},finish);
+      break;}
+
+    case 'pr-topic':pr.topic=v;$$('[data-act="pr-topic"]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v));});updateSetup();break;
+    case 'pr-level':pr.level=v;$$('[data-act="pr-level"]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v));});updateSetup();break;
+    case 'pr-start':case 'pr-again':{
+      var items=buildSession();
+      if(items.length<1){toast('No questions match those filters.');break;}
+      ps={items:items,i:0,correct:0,done:false};drawQuestion();window.scrollTo(0,0);break;}
+    case 'pr-setup':ps=null;renderPractice();break;
+    case 'pr-play':{var it0=ps.items[ps.i];speak(it0.phrase.text,{rate:el.dataset.slow?0.7:undefined});break;}
+    case 'pr-pick':{
+      var it=ps.items[ps.i];if(it.answered)break;
+      it.picked=+el.dataset.k;it.ok=it.opts[it.picked].ok;it.answered=true;if(it.ok)ps.correct++;drawQuestion();break;}
+    case 'pr-place':{var q1=ps.items[ps.i];q1.placed.push(+el.dataset.i);drawQuestion();break;}
+    case 'pr-unplace':{var q2=ps.items[ps.i];q2.placed=q2.placed.filter(function(x){return x!==+el.dataset.i;});drawQuestion();break;}
+    case 'pr-check':{
+      var q3=ps.items[ps.i];
+      q3.ok=q3.placed.map(function(i){return q3.tokens[i];}).join(' ')===q3.phrase.text;
+      q3.answered=true;if(q3.ok)ps.correct++;drawQuestion();break;}
+    case 'pr-next':
+      stopSpeech();
+      if(ps.i>=ps.items.length-1){finishSession();drawResults();}else{ps.i++;drawQuestion();}
+      window.scrollTo(0,0);break;
+    case 'pr-savemissed':
+      ps.items.forEach(function(i){if(!i.ok&&i.phrase)S.saved[i.phrase.id]=1;});save();
+      el.disabled=true;el.textContent='Saved to Phrasebook';break;
+
+    case 'reset-ask':
+      $('#resetBox').innerHTML='<div class="reset-box"><p>This clears learned phrases, saved phrases, dialogue scores, practice history and your streak on this device.</p><div class="btn-row"><button class="btn sec" data-act="reset-cancel">Cancel</button><button class="btn" data-act="reset-do">Reset everything</button></div></div>';break;
+    case 'reset-cancel':$('#resetBox').innerHTML='';break;
+    case 'reset-do':{var au=S.audio;S=defaults();S.audio=au;save();ps=null;renderProgress();toast('Progress reset.');break;}
+  }
+});
+document.addEventListener('input',function(e){
+  if(e.target.id==='pbSearch'){pb.q=e.target.value;renderPBList();}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAudio();});
+window.addEventListener('hashchange',route);
+
+syncAudioUI();
+route();
+})();
+</script>
+
+</body>
+</html>
