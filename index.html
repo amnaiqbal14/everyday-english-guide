@@ -11,28 +11,28 @@
 <style>
 /* Layout concept: a sticky header with five tabs over one calm column. Phrases are ruled lists, dialogues are chat bubbles, practice is one question at a time. The only loud element is the marigold highlighter that marks whatever is being spoken. */
 :root{
-  --bg:#F1F4F8; --surface:#FFFFFF; --ink:#101B2D; --ink-2:#4A5A70; --line:#D9E0EA;
-  --accent:#2547E0; --accent-fg:#FFFFFF; --accent-soft:#E4E9FD;
-  --hl:#FFD65C; --hl-ink:#101B2D;
+  --bg:#F7F4FD; --surface:#FFFFFF; --ink:#1F1535; --ink-2:#5B5175; --line:#E3DBF3;
+  --accent:#6B2FD9; --accent-fg:#FFFFFF; --accent-soft:#EDE5FC;
+  --hl:#FFD65C; --hl-ink:#1F1535;
   --good:#17794A; --good-soft:#DDF3E8; --bad:#B8321F; --bad-soft:#FBE4E0;
-  --shadow:0 10px 30px rgba(16,27,45,.14);
+  --shadow:0 10px 30px rgba(31,21,53,.14);
   --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
   --font-body:'Figtree','Segoe UI',system-ui,-apple-system,sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0D1422; --surface:#151E31; --ink:#EAF0FA; --ink-2:#9FB0C9; --line:#263249;
-    --accent:#8AA0FF; --accent-fg:#0D1422; --accent-soft:#1D2A55;
-    --hl:#F2C14E; --hl-ink:#0D1422;
+    --bg:#150E26; --surface:#1F1636; --ink:#F1ECFB; --ink-2:#B5A9D3; --line:#35294F;
+    --accent:#B596FF; --accent-fg:#150E26; --accent-soft:#33235E;
+    --hl:#F2C14E; --hl-ink:#150E26;
     --good:#4CC38A; --good-soft:#12352A; --bad:#FF8A78; --bad-soft:#3A1B1A;
     --shadow:0 10px 30px rgba(0,0,0,.5);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0D1422; --surface:#151E31; --ink:#EAF0FA; --ink-2:#9FB0C9; --line:#263249;
-  --accent:#8AA0FF; --accent-fg:#0D1422; --accent-soft:#1D2A55;
-  --hl:#F2C14E; --hl-ink:#0D1422;
+  --bg:#150E26; --surface:#1F1636; --ink:#F1ECFB; --ink-2:#B5A9D3; --line:#35294F;
+  --accent:#B596FF; --accent-fg:#150E26; --accent-soft:#33235E;
+  --hl:#F2C14E; --hl-ink:#150E26;
   --good:#4CC38A; --good-soft:#12352A; --bad:#FF8A78; --bad-soft:#3A1B1A;
   --shadow:0 10px 30px rgba(0,0,0,.5);
   color-scheme:dark;
@@ -114,9 +114,9 @@ mark{background:var(--hl);color:var(--hl-ink);padding:0 2px;border-radius:3px}
 
 /* Today */
 .today-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:stretch}
-.potd{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:grid;gap:14px;align-content:start}
+.potd{background:var(--accent-soft);border:1px solid var(--line);border-radius:18px;padding:26px;display:grid;gap:14px;align-content:start}
 .potd-text{margin:0;font:650 clamp(1.5rem,3.6vw,2.2rem)/1.25 var(--font-display);letter-spacing:-.015em;text-wrap:balance}
-.hl{background-image:linear-gradient(var(--hl),var(--hl));background-size:100% .26em;background-position:0 94%;background-repeat:no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl{-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .hl.speaking{background-size:100% 100%;color:var(--hl-ink);box-shadow:none}
 .potd-note{margin:0;color:var(--ink-2)}
 .potd-reply{margin:0;padding:12px 14px;background:var(--bg);border-radius:10px;display:grid;gap:2px}
